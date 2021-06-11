@@ -3,14 +3,12 @@
 
 # ## Integration von Arbeitslosenzahlen auf Bundeslandebene
 
-# In[163]:
 
 
 # Autor: Roman Schulze
 # Datenquelle: Bundesagentur für Arbeit
 
 
-# In[164]:
 
 
 # Bibliotheken importieren
@@ -20,7 +18,6 @@ from os import listdir
 from os.path import isfile, join
 
 
-# In[165]:
 
 
 # Liste aller Datein 
@@ -29,7 +26,6 @@ files = [f for f in listdir("Arbeitslose") if isfile(join("Arbeitslose", f))]
 
 # ### 1. Funktionen zur Formattierung und Bereinigung der Daten
 
-# In[168]:
 
 
 # Formattierung der Daten
@@ -50,7 +46,6 @@ def get_data_formatted(df, key=1, val="Arbeitslose_Mai19"):
     return df
 
 
-# In[169]:
 
 
 # Transformation der Daten mithilfe der Pivot-Tabelle
@@ -60,7 +55,6 @@ def transform_data(df, val="Arbeitslose_Mai19"):
     return flattened
 
 
-# In[170]:
 
 
 # Sortierung der Spalten & Datentypassung
@@ -77,9 +71,8 @@ def convert_data(df):
     return df
 
 
-# ### 2. Laden und Zusammenführung der Daten
+#### 2. Laden und Zusammenführung der Daten
 
-# In[171]:
 
 
 # Lade Daten für jeden Zeitpunkt 
@@ -103,21 +96,18 @@ for file in files:
 # Anmerkung: Berechnung nimmt einige Minuten in Anspruch.
 
 
-# In[172]:
 
 
 # Zusammenführen aller individuellen Dataframes in einen ganzen
 df_1 = pd.concat(list_of_dataframes_1)
 
 
-# In[173]:
 
 
 # Zusammenführen aller individuellen Dataframes in einen ganzen
 df_2 = pd.concat(list_of_dataframes_2)
 
 
-# In[176]:
 
 
 # finale Anpassungen
@@ -125,21 +115,18 @@ df_1 = convert_data(df_1)
 df_2 = convert_data(df_2)
 
 
-# In[177]:
 
 
 # Erste fünf Zeilen des ersten dfs
 df_1.head()
 
 
-# In[178]:
 
 
 # Erste fünf Zeilen des zweiten dfs
 df_2.head()
 
 
-# In[179]:
 
 
 # Zusammenführung der Datensätze
@@ -147,35 +134,30 @@ df_all=pd.merge(df_1, df_2.iloc[:, 0:3], how='left', left_on=["Jahr","Berufsgrup
                 suffixes=["_Alo", "_gem_Stellen"])
 
 
-# In[180]:
 
 
 # erste fünf Zeilen
 df_all.head()
 
 
-# In[181]:
 
 
 # Format
 df_all.shape
 
 
-# In[182]:
 
 
 # Matching Id
 df_all["ID"] = np.nan
 
 
-# In[183]:
 
 
 # generiere Matching-ID für matching mit Beschäftigten-Daten
 df_all.loc[df_all.Jahr == "Apr 2019", "ID"] = "Sep 2018"
 
 
-# In[185]:
 
 
 # dictionary mit allen Paarungen: Beschäftigte & Alos
@@ -192,7 +174,6 @@ dic = {"Jun 2018": ["Mrz 2019"],
       }
 
 
-# In[187]:
 
 
 # generiere Matching-ID für matching mit Beschäftigten-Daten
@@ -201,23 +182,19 @@ for element in dic:
             df_all.loc[df_all["Jahr"] == value, "ID"] = element
 
 
-# In[188]:
 
 
 # erste fünf Zeilen 
 df_all.head()
 
 
-# ###### Speicherung der Daten als Excel Datei
+####### Speicherung der Daten als Excel Datei
 
-# In[189]:
 
 
 # ALs Excel File speichern
 df_all.to_excel("generierte Datensätze/Arbeitslose_nach_BL.xlsx")  
 
-
-# In[ ]:
 
 
 
