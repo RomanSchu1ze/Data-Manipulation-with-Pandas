@@ -108,22 +108,22 @@ Berufe = {
 
 # Definiere BL Bayern
 Bundesländer = {
-    "Schleswig-Holstein":1,
-    "Hamburg":2,
-    "Niedersachsen":3,
-    "Bremen":4,
-    "Nordrhein-Westfalen":5,
-    "Hessen":6,
-    "Rheinland-Pfalz":7,
-    "Baden-Württemberg":8,
-    "Bayern":9,
-    "Saarland":10,
-    "Berlin":11,
-    "Brandenburg":12,
-    "Mecklenburg-Vorp.":13,
-    "Sachsen":14,
-    "Sachsen-Anhalt":15,
-    "Thüringen":16
+    "Schleswig-Holstein" : [1],
+    "Hamburg" : [2],
+    "Niedersachsen" : [3],
+    "Bremen" : [4],
+    "Nordrhein-Westfalen" : [5],
+    "Hessen" : [6],
+    "Rheinland-Pfalz" : [7],
+    "Baden-Württemberg" : [8],
+    "Bayern" : [9],
+    "Saarland" : [10],
+    "Berlin" : [11],
+    "Brandenburg" : [12],
+    "Mecklenburg-Vorp." : [13],
+    "Sachsen" : [14],
+    "Sachsen-Anhalt" : [15],
+    "Thüringen" : [16]
 }
 
 
@@ -173,7 +173,7 @@ list_of_df = []
 # Frauenquote für jedes Bundesland und jeden Beruf
 for key, value in Bundesländer.items():
     # Berechnung der Frauenquote für jeden Beruf 
-    df_new = calc_fem_share(df, [value])
+    df_new = calc_fem_share(df, value)
     # Bundesland als Spalte ergänzen 
     df_new["Bundesland"] = key
     # Daten nach Frauenqote sortieren
