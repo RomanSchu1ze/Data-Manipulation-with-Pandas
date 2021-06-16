@@ -11,30 +11,26 @@ import pandas as pd
 import numpy as np
 
 
-# ##### 1. Daten einlesen
+###### 1. Daten einlesen
 
-# In[2]:
 
 
 # daten laden
 df = pd.read_csv("Daten/202009_Besch_Laender.csv", sep=";")
 
 
-# In[3]:
 
 
 # erste fünf Zeilen
 df.head()
 
 
-# In[4]:
 
 
 # Datentypen
 df.dtypes
 
 
-# In[5]:
 
 
 # Bereinigung der Daten
@@ -46,23 +42,20 @@ def clean_data(df):
     return df
 
 
-# In[6]:
 
 
 # Anwendung der Funktion
 df = clean_data(df)
 
 
-# In[7]:
 
 
 # erste fünf Zeilen
 df.head()
 
 
-# ##### 2. Berufe Matching
+###### 2. Berufe Matching
 
-# In[8]:
 
 
 # Auflistung der DB Berufe und deren zugehöriger ID´s
@@ -110,9 +103,7 @@ Berufe = {
 }
 
 
-# ##### 3. Frauenquote für jeden Beruf berechnen
-
-# In[9]:
+###### 3. Frauenquote für jeden Beruf berechnen
 
 
 # Definiere BL Bayern
@@ -136,14 +127,12 @@ Bundesländer = {
 }
 
 
-# In[10]:
 
 
 # Frauen ID
 Frauen_ID = [2]
 
 
-# In[11]:
 
 
 # Berechnung der Frauenquote für jeden DB Fokusberuf
@@ -177,7 +166,6 @@ def calc_fem_share(df, Bundesland):
     return data
 
 
-# In[13]:
 
 
 # leere Liste um Ergebnisse zu speichern
@@ -196,28 +184,24 @@ for key, value in Bundesländer.items():
     list_of_df.append(df_sorted)
 
 
-# In[14]:
 
 
 # Zusammenführung der Dataframes 
 df_all = pd.concat(list_of_df)
 
 
-# In[15]:
 
 
 # erste fünf Zeilen für das Bundesland Bayern ausgeben
 df_all[df_all["Bundesland"] == "Bayern"].head()
 
 
-# In[ ]:
 
 
 # ALs Excel File speichern
 df_all.to_excel("Frauenanteil.xlsx")
 
 
-# In[ ]:
 
 
 
