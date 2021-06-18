@@ -67,7 +67,7 @@ def clean_data(df):
 # Lade Daten für jeden Zeitpunkt 
 list_of_dataframes = []
 for file in files:
-    df = pd.read_excel("Beschäftigte/" + file, sheet_name="aGB - Tabelle II", header = 9, nrows=300)
+    df = pd.read_excel("Beschäftigte/" + file, sheet_name="aGB - Tabelle II", header=9, nrows=300)
     df = get_data_formatted(df)
     df = clean_data(df)
     df["Jahr"] = file[20:28].replace("_", " ")
@@ -123,7 +123,7 @@ df_all.to_excel("generierte Datensätze/aGB_Beschäftigte_nach_BL.xlsx")
 # Lade Daten für jeden Zeitpunkt 
 list_of_dataframes = []
 for file in files:
-    df = pd.read_excel("Beschäftigte/" + file, sheet_name="SVB - Tabelle II", header = 9, nrows=300)
+    df = pd.read_excel("Beschäftigte/" + file, sheet_name="SVB - Tabelle II", header=9, nrows=300)
     df = get_data_formatted(df)
     df = clean_data(df)
     df["Jahr"] = file[20:28].replace("_", " ")
